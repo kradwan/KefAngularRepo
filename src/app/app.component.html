@@ -1,20 +1,74 @@
-<!--The whole content below can be removed with the new code.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCAyNTAgMjUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyNTAgMjUwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDojREQwMDMxO30NCgkuc3Qxe2ZpbGw6I0MzMDAyRjt9DQoJLnN0MntmaWxsOiNGRkZGRkY7fQ0KPC9zdHlsZT4NCjxnPg0KCTxwb2x5Z29uIGNsYXNzPSJzdDAiIHBvaW50cz0iMTI1LDMwIDEyNSwzMCAxMjUsMzAgMzEuOSw2My4yIDQ2LjEsMTg2LjMgMTI1LDIzMCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAJIi8+DQoJPHBvbHlnb24gY2xhc3M9InN0MSIgcG9pbnRzPSIxMjUsMzAgMTI1LDUyLjIgMTI1LDUyLjEgMTI1LDE1My40IDEyNSwxNTMuNCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAxMjUsMzAgCSIvPg0KCTxwYXRoIGNsYXNzPSJzdDIiIGQ9Ik0xMjUsNTIuMUw2Ni44LDE4Mi42aDBoMjEuN2gwbDExLjctMjkuMmg0OS40bDExLjcsMjkuMmgwaDIxLjdoMEwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMQ0KCQlMMTI1LDUyLjF6IE0xNDIsMTM1LjRIMTA4bDE3LTQwLjlMMTQyLDEzNS40eiIvPg0KPC9nPg0KPC9zdmc+DQo=" />
+<h1>Angular</h1>
+<!--<div *ngIf="courses.length > 0" *ngIf="doWeHaveAnyCourses()">
+    List of courses
 </div>
-<h2>Here are some links to help you start: </h2>
+<div *ngIf="courses.length == 0">No courses</div>
+<div *ngIf="courses.length > 0; then listCourses else noCourses"></div>
+<ng-template #listCourses>List of courses</ng-template>
+<ng-template #noCourses>No courses</ng-template>-->
+
+
+<courses></courses>
+<app-authors></app-authors>
+<br />
+
+<app-favorite [is-favorite]="post.isSelected" (change)="onFavoritChanged($event)"></app-favorite>
+<bootstrap-panel>
+    <!--ng-container : puts as plain text into DOM without any surrounding markup-->
+    <ng-container class="heading">Heading using ngContent call .class name</ng-container>
+    <div class="body">
+        <h2>Body</h2>
+        <p>Body using ngContent #id name </p>
+    </div>
+</bootstrap-panel>
+
+<app-like [isActive]="tweet.isLiked" [likesCount]="tweet.likesCount"></app-like>
+<ul class="nav nav-pills">
+    <li [class.active]="viewMode == 'map'"><a (click)="viewMode = 'map'">Map View</a></li>
+    <li [class.active]="viewMode == 'list'"><a (click)="viewMode = 'list'">List View</a></li>
+</ul>
+<div [ngSwitch]="viewMode">
+    <div *ngSwitchCase="'map'">Map View Content</div>
+    <div *ngSwitchCase="'list'">List View Content</div>
+    <div *ngSwitchDefault>Otherwise</div>
+</div>
+
+<button type="submit" (click)="onAdd()">Add</button>
 <ul>
-  <li>
-    <h2><a target="_blank" href="https://angular.io/docs/ts/latest/tutorial/">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="http://angularjs.blogspot.ca/">Angular blog</a></h2>
-  </li>
+    <li *ngFor="let course of courses">
+        {{ course.name }}
+        <button (click)="onUpdate(course)">Update</button>
+        <button (click)="onRemove(course)">Remove</button>
+    </li>
 </ul>
 
+<div>
+    <input type="text" appInputFormat [format]="'uppercase'">
+    <span id="demo" appInputFormat >Mouse over me</span>
+</div>
+
+<zippy [zippy-heading]="'Heading from app.component.html'">
+    <!--<div class="heading">Heading from app.component.html</div>-->
+    <div class="body">Body content from app.component.html</div>
+</zippy>
+
+<contact-form></contact-form>
+<br>
+<h2>Course form</h2>
+<course-form></course-form>
+
+<br>
+<signup-form></signup-form>
+<br>
+
+<new-course></new-course>
+
+<app-voter [votes]="stackGrade.voteCount" [my-vote]="stackGrade.userVote" (vote)="onVote($event)"></app-voter>
+
+<p>Search-box calling spotify:</p>
+<app-search-box-spotify [search-url]="search.url"></app-search-box-spotify>
+
+<!--'https://api.spotify.com/v1/search?type=artist&q='-->
+
+<p>Http requests</p>
+<app-photos></app-photos>
