@@ -1,0 +1,61 @@
+<form [formGroup]="form" (ngSubmit)="login()">
+    <div *ngIf="form.errors" class="alert alert-danger">
+        The User name or password is invalid.
+    </div>
+    <!--can specify here as well dedicated errors-->
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input 
+            formControlName="username"
+            id="username" 
+            type="text" 
+            class="form-control">
+        <!--display loader, formControlName="username" from form returns a status if at least one pending action is going on-->
+        <div *ngIf="username.pending">
+            <!--Checking for uniqueness...-->
+            <span class="glyphicon glyphicon-refresh spinning"></span>
+            Checking for uniqueness...
+            </div>
+        <div *ngIf="username.invalid && username.touched"  
+            class="alet alert-danger">
+            <div *ngIf="username.errors.required">
+                User name is required.
+            </div>
+            <div *ngIf="username.errors.minlength">
+                User name has less than {{ username.errors.minlength.requiredLength }} characters.
+            </div>
+            <div *ngIf="username.errors.cannotContainSpace">
+                User name cannot contain space.
+            </div>
+            <div *ngIf="username.errors.shouldBeUnique">
+                User name is already taken.
+            </div>
+        </div>
+            
+    </div>
+    <div class="form-group" (ngSubmit)="login">
+        <label for="password">Password</label>
+        <input 
+            formControlName="password"
+            id="password" 
+            type="text" 
+            class="form-control">
+        <!--explicit approach, without property-->
+        <div *ngIf="form.get('password').invalid && form.get('password').touched"
+            class="alet alert-danger">
+            <div *ngIf="form.get('password').errors.required">
+                Password required.
+            </div>
+            <div *ngIf="form.get('password').errors.minlength">
+                Password has less than {{ form.get('password').errors.minlength.requiredLength }} characters.
+            </div>
+        </div>
+    </div>
+
+    <p> {{ form.value | json }} </p>
+    <p>{{ form.errors | json}}</p>
+    <p>{{ username.errors | json}}</p>
+    <p>{{ form.get('password').errors | json}}</p>
+
+    <button class="btn btn-primary" type="submit">Sign Up</button>
+</form>
