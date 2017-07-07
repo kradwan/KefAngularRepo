@@ -1,74 +1,16 @@
 <h1>Angular</h1>
-<!--<div *ngIf="courses.length > 0" *ngIf="doWeHaveAnyCourses()">
-    List of courses
-</div>
-<div *ngIf="courses.length == 0">No courses</div>
-<div *ngIf="courses.length > 0; then listCourses else noCourses"></div>
-<ng-template #listCourses>List of courses</ng-template>
-<ng-template #noCourses>No courses</ng-template>-->
 
-
-<courses></courses>
-<app-authors></app-authors>
-<br />
-
-<app-favorite [is-favorite]="post.isSelected" (change)="onFavoritChanged($event)"></app-favorite>
-<bootstrap-panel>
-    <!--ng-container : puts as plain text into DOM without any surrounding markup-->
-    <ng-container class="heading">Heading using ngContent call .class name</ng-container>
-    <div class="body">
-        <h2>Body</h2>
-        <p>Body using ngContent #id name </p>
-    </div>
-</bootstrap-panel>
-
-<app-like [isActive]="tweet.isLiked" [likesCount]="tweet.likesCount"></app-like>
-<ul class="nav nav-pills">
-    <li [class.active]="viewMode == 'map'"><a (click)="viewMode = 'map'">Map View</a></li>
-    <li [class.active]="viewMode == 'list'"><a (click)="viewMode = 'list'">List View</a></li>
-</ul>
-<div [ngSwitch]="viewMode">
-    <div *ngSwitchCase="'map'">Map View Content</div>
-    <div *ngSwitchCase="'list'">List View Content</div>
-    <div *ngSwitchDefault>Otherwise</div>
-</div>
-
-<button type="submit" (click)="onAdd()">Add</button>
+<h1>App Router</h1>
 <ul>
-    <li *ngFor="let course of courses">
-        {{ course.name }}
-        <button (click)="onUpdate(course)">Update</button>
-        <button (click)="onRemove(course)">Remove</button>
-    </li>
+    <li><a routerLink="">Home</a></li>
+    <li><a routerLink="signup">Sign Up</a></li>
+    <li><a routerLink="courses">Courses</a></li>
+    <li><a routerLink="posts">Posts</a></li>
+    <li><a routerLink="photos">Photos</a></li>
+    <li><a [routerLink]="['photo', 1]">Photo details</a></li>
+    <li><a routerLink="authors">Authors</a></li>
+    <li><a routerLink="common-widgets">Widgets</a></li>
 </ul>
-
-<div>
-    <input type="text" appInputFormat [format]="'uppercase'">
-    <span id="demo" appInputFormat >Mouse over me</span>
-</div>
-
-<zippy [zippy-heading]="'Heading from app.component.html'">
-    <!--<div class="heading">Heading from app.component.html</div>-->
-    <div class="body">Body content from app.component.html</div>
-</zippy>
-
-<contact-form></contact-form>
-<br>
-<h2>Course form</h2>
-<course-form></course-form>
-
-<br>
-<signup-form></signup-form>
-<br>
-
-<new-course></new-course>
-
-<app-voter [votes]="stackGrade.voteCount" [my-vote]="stackGrade.userVote" (vote)="onVote($event)"></app-voter>
-
-<p>Search-box calling spotify:</p>
-<app-search-box-spotify [search-url]="search.url"></app-search-box-spotify>
-
-<!--'https://api.spotify.com/v1/search?type=artist&q='-->
-
-<p>Http requests</p>
-<app-photos></app-photos>
+<!--imperative navigation-->
+<button (click)="onClick()">Click me</button>
+<router-outlet></router-outlet>

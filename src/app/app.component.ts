@@ -1,13 +1,29 @@
+import { AuthService } from './../services/auth.service';
+import { Router } from '@angular/router';
 import { FavoritChangedEventArgs } from './favorite/favorite.component';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'app';
+
+  constructor(private _router: Router, private authService: AuthService) {
+    
+  }
+
+  ngOnInit() {
+    this.authService.login('login', 'password');
+  }
+
+  onClick() {
+    // imperative navigation - here we use route array parameters as in routes
+    this._router.navigate(['photo', 2]);
+  }
+
   post = {
     title: 'Post title',
     isSelected: true
