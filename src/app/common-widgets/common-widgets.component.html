@@ -1,0 +1,56 @@
+<h1>List of shared widgets:</h1>
+<div>
+<!--<div1-->
+<!--<div *ngIf="courses.length == 0">No courses</div>-->
+<div *ngIf="courses.length > 0; then listCourses else noCourses"></div>
+  {{courses | json}}
+  <br>
+  <ng-template #listCourses>List of courses</ng-template>
+
+  <ng-template #noCourses>No courses</ng-template>
+  <button type="submit" (click)="onAdd()">Add</button>
+<ul>
+    <li *ngFor="let course of courses">
+        {{ course.name }}
+        <button (click)="onUpdate(course)">Update</button>
+        <button (click)="onRemove(course)">Remove</button>
+    </li>
+</ul>
+</div>
+
+<h2>Favorite</h2>
+<app-favorite [is-favorite]="post.isSelected" (change)="onFavoritChanged($event)"></app-favorite>
+
+<h2> Bootstrap-panel </h2>
+<bootstrap-panel>
+    <!--ng-container : puts as plain text into DOM without any surrounding markup-->
+    <ng-container class="heading">Heading using ngContent call .class name</ng-container>
+    <div class="body">
+        <h2>Body</h2>
+        <p>Body using ngContent #id name </p>
+    </div>
+</bootstrap-panel>
+
+<h2>Tweet: Is liked</h2>
+<app-like [isActive]="tweet.isLiked" [likesCount]="tweet.likesCount"></app-like>
+
+<h2>Navigation buttons</h2>
+<ul class="nav nav-pills">
+    <li [class.active]="viewMode == 'map'"><a (click)="viewMode = 'map'">Map View</a></li>
+    <li [class.active]="viewMode == 'list'"><a (click)="viewMode = 'list'">List View</a></li>
+</ul>
+<div [ngSwitch]="viewMode">
+    <div *ngSwitchCase="'map'">Map View Content</div>
+    <div *ngSwitchCase="'list'">List View Content</div>
+    <div *ngSwitchDefault>Otherwise</div>
+</div>
+<button type="submit" (click)="onAdd()">Add</button>
+
+<h2> Zippy </h2>
+<zippy [zippy-heading]="'Heading from app.component.html'">
+    <!--<div class="heading">Heading from app.component.html</div>-->
+    <div class="body">Body content from app.component.html</div>
+</zippy>
+
+<h2> stackoverflow Grade </h2>
+<app-voter [votes]="stackGrade.voteCount" [my-vote]="stackGrade.userVote" (vote)="onVote($event)"></app-voter>
