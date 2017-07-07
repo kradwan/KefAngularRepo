@@ -1,0 +1,9 @@
+<div>
+  <ul class="list-group">
+    <li *ngFor="let photo of photos"
+      class="list-group-item"
+      value="{{ photo.id }}" attr.album="{{ photo.albumId }}">
+       {{ photo.title }}
+    </li>
+  </ul>
+</div>

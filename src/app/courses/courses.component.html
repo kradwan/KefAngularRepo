@@ -1,0 +1,30 @@
+ <form #f="ngForm" ngForm (ngSubmit)="submit(f)">
+  <div class="form-group">
+    <h2>{{ "Title:" + title }} <Br /> {{ " Method: " + getTitle() }}</h2>
+        <ul>
+            <li *ngFor="let course of _courses">
+                {{ course }}
+            </li>
+        </ul>
+    <div (click)="onDivClicked()">
+        <!--<h2>onKeyUp old approach</h2>
+        <input ngModel name="keyUp" type="text" (keyup.enter)="onKeyUp($event)">
+        <button (click)="onSave($event)"
+            class="btn " [class.btn-primary.active]="isActive">Save</button>-->
+        <h2>onKeyUp new approach using <strong>Template Variable</strong></h2>
+        
+        <input ngModel name="oldEmial" id="OLD" [value]="email" type="text" (keyup.enter)="email = $event.target.value; onKeyUpEmail()">
+        <input ngModel name="newEmial" id="NEW" [(ngModel)]="email" type="text" (keyup.enter)="onKeyUpEmail()">
+
+        {{ textCourses | summary:30}}
+    </div>
+    </div>
+    <div (click)="onShowDetails(f)">
+        <a  [routerLink]="['photo', 1]">Photo details</a>
+    </div>
+    <button 
+        class="btn btn-primary"
+        [disabled]="!f.valid">
+        Submit
+    </button>
+</form>

@@ -1,3 +1,4 @@
+import { ReactiveFormComponent } from './../shared-guards/prevent-unsaved-changes-guard.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UsernameValidators } from './../common/validators/username.validators';
@@ -7,7 +8,7 @@ import { UsernameValidators } from './../common/validators/username.validators';
   templateUrl: './signup-form.component.html',
   styleUrls: ['./signup-form.component.css']
 })
-export class SignupFormComponent implements OnInit {
+export class SignupFormComponent implements OnInit, ReactiveFormComponent {
   form = new FormGroup(
     {
       'username': new FormControl('', [
@@ -45,5 +46,10 @@ export class SignupFormComponent implements OnInit {
     // }
     // if you want setErrors at a particular form element you have to call it this method per formControl object
     // this.username.setErrors
+  }
+
+  // Guards
+  hasUnsavedChanges(): Boolean {
+    return this.form.dirty;
   }
 }
