@@ -1,11 +1,16 @@
+import { PreventUnsavedChangesGuard, PreventUnsavedChangesGuardTemplate } from './shared-guards/prevent-unsaved-changes-guard.service';
+import { AuthService } from './../services/auth.service';
+import { photosRouting } from './photos/photos.routing';
+import { PostsService } from './../services/posts.service';
 import { AuthorsService } from './../services/authors.service';
 import { CoursesService } from './../services/courses.service';
-import { CoursesComponent } from './courses.component';
+import { CoursesComponent } from './courses/courses.component';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { HttpModule } from '@angular/http';
-
+import { RouterModule, Routes } from '@angular/router';
 
 import { SummaryPipe } from './../pipes/summary.pipe';
 
@@ -25,6 +30,16 @@ import { VoterComponent } from './voter/voter.component';
 import { SearchBoxSpotifyComponent } from './search-box-spotify/search-box-spotify.component';
 import { PhotosComponent } from './photos/photos.component';
 import { PostsBoardComponent } from './posts-board/posts-board.component';
+import { AppErrorHandler } from 'app/common/errors/app-error-handler';
+
+import { newCourseRouting } from './new-course/new-course.routing';
+import { signupRouting } from './signup-form/signup-form.routing'
+import { routing } from './app.routing';
+import { PhotoDetailsComponent } from './photo-details/photo-details.component';
+import { AuthGuard } from 'app/shared-guards/auth-guard.service';
+import { HomeComponent } from './home/home.component';
+import { CommonWidgetsComponent } from './common-widgets/common-widgets.component';
+import { commonWidgetsRouting } from 'app/common-widgets/common.routing';
 
 @NgModule({
   declarations: [
@@ -45,17 +60,36 @@ import { PostsBoardComponent } from './posts-board/posts-board.component';
     VoterComponent,
     SearchBoxSpotifyComponent,
     PhotosComponent,
-    PostsBoardComponent
+    PostsBoardComponent,
+    PhotoDetailsComponent,
+    HomeComponent,
+    CommonWidgetsComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+
+    // routing - order important
+    photosRouting,
+    newCourseRouting,
+    signupRouting,
+    commonWidgetsRouting,
+    routing
   ],
   providers: [
     CoursesService,
-    AuthorsService
+    AuthorsService,
+    PostsService,
+    AuthService,
+
+    { provide: ErrorHandler, useClass: AppErrorHandler },
+
+    // Guards
+    AuthGuard,
+    PreventUnsavedChangesGuard,
+    PreventUnsavedChangesGuardTemplate
   ],
   bootstrap: [AppComponent]
 })
