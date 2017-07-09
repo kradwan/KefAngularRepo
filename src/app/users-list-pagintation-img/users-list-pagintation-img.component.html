@@ -1,0 +1,22 @@
+<div class="container">
+  <h1>Users</h1>
+  <h2>Testing</h2>
+  {{isLoading | json}}
+  <div *ngIf="isLoading">
+    Loading
+      <i class="fa fa-spinner fa-spin fa-5x"></i>
+  </div>
+  <div *ngFor="let user of users" class="media">
+    <div class="media-left">
+      <a href="#">
+        <img class="avatar media-object" src="{{ user.avatar_url }}" alt="...">
+      </a>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">
+        <a [routerLink]="['/users', user.id, user.login]">{{ user.login }}</a>
+      </h4>
+      <a href="follower.html_url">{{ user.html_url }}</a>
+    </div>
+  </div>
+</div>

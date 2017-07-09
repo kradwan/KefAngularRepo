@@ -17,14 +17,14 @@ export class PreventUnsavedChangesGuardTemplate implements CanDeactivate<Templat
     }
 }
 
-export interface ReactiveFormComponent {
+export interface ReactiveFormGuard {
     // for template driven form
     hasUnsavedChanges(): Boolean;
 }
 
 
-export class PreventUnsavedChangesGuard implements CanDeactivate<ReactiveFormComponent> {
-    canDeactivate(component: ReactiveFormComponent) {
+export class PreventUnsavedChangesGuard implements CanDeactivate<ReactiveFormGuard> {
+    canDeactivate(component: ReactiveFormGuard) {
         if (component.hasUnsavedChanges())
             return confirm('Are you sure, reactiveGuard?');
 

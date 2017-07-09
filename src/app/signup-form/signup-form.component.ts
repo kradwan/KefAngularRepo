@@ -1,4 +1,5 @@
-import { ReactiveFormComponent } from './../shared-guards/prevent-unsaved-changes-guard.service';
+import { EmailValidators } from './../common/validators/email.validators';
+import { ReactiveFormGuard } from './../shared-guards/prevent-unsaved-changes-guard.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UsernameValidators } from './../common/validators/username.validators';
@@ -8,7 +9,7 @@ import { UsernameValidators } from './../common/validators/username.validators';
   templateUrl: './signup-form.component.html',
   styleUrls: ['./signup-form.component.css']
 })
-export class SignupFormComponent implements OnInit, ReactiveFormComponent {
+export class SignupFormComponent implements OnInit, ReactiveFormGuard {
   form = new FormGroup(
     {
       'username': new FormControl('', [
@@ -19,6 +20,16 @@ export class SignupFormComponent implements OnInit, ReactiveFormComponent {
         UsernameValidators.minLength,
       ], [ // async validators
         UsernameValidators.shouldBeUnique
+      ]),
+      'email': new FormControl('', [
+        // Validators.required,
+        // Validators.minLength(3),
+        UsernameValidators.cannotContainSpace,
+        UsernameValidators.usernameRequired,
+        UsernameValidators.minLength,
+        EmailValidators.email,
+      ], [ // async validators
+        // UsernameValidators.shouldBeUnique
       ]),
       //FormGroup
       password: new FormControl('', [

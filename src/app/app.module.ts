@@ -1,3 +1,5 @@
+import { UsersFollowersGithubService } from './users-list-pagintation-img/users-followers-github.service';
+import { usersRouting } from './users-list-pagintation-img/users.routing';
 import { PreventUnsavedChangesGuard, PreventUnsavedChangesGuardTemplate } from './shared-guards/prevent-unsaved-changes-guard.service';
 import { AuthService } from './../services/auth.service';
 import { photosRouting } from './photos/photos.routing';
@@ -40,6 +42,9 @@ import { AuthGuard } from 'app/shared-guards/auth-guard.service';
 import { HomeComponent } from './home/home.component';
 import { CommonWidgetsComponent } from './common-widgets/common-widgets.component';
 import { commonWidgetsRouting } from 'app/common-widgets/common.routing';
+import { UsersListPagintationImgComponent } from './users-list-pagintation-img/users-list-pagintation-img.component';
+import { UserDetailsImgComponent } from './user-details-img/user-details-img.component';
+import { WidgetSpinnerComponent } from './widget-spinner/widget-spinner.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +69,9 @@ import { commonWidgetsRouting } from 'app/common-widgets/common.routing';
     PhotoDetailsComponent,
     HomeComponent,
     CommonWidgetsComponent,
+    UsersListPagintationImgComponent,
+    UserDetailsImgComponent,
+    WidgetSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,6 +80,7 @@ import { commonWidgetsRouting } from 'app/common-widgets/common.routing';
     HttpModule,
 
     // routing - order important
+    usersRouting,
     photosRouting,
     newCourseRouting,
     signupRouting,
@@ -83,6 +92,7 @@ import { commonWidgetsRouting } from 'app/common-widgets/common.routing';
     AuthorsService,
     PostsService,
     AuthService,
+    UsersFollowersGithubService,
 
     { provide: ErrorHandler, useClass: AppErrorHandler },
 

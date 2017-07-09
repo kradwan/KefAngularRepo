@@ -9,14 +9,12 @@ export class UsernameValidators {
     }
 
     static usernameRequired(control: AbstractControl): ValidationErrors {
-        // tslint:disable-next-line:curly
         if ((control.value as string).length < 1)
             return { required: true }
         return null;
     }
 
     static minLength(control: AbstractControl): ValidationErrors {
-        // tslint:disable-next-line:curly
         if ((control.value as string).length < 5)
             return {
                 minlength: {
